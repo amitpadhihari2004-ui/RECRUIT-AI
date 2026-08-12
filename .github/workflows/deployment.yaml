@@ -40,10 +40,24 @@ jobs:
 
       - name: Check backend imports
         env:
+          # MongoDB - CI test value
           MONGO_URI: "mongodb://localhost:27017/recruit_ai_ci"
+
+          # Cloudflare R2 - CI test values
+          R2_ENDPOINT: "https://ci.example.r2.cloudflarestorage.com"
+          R2_ACCESS_KEY_ID: "ci-test-access-key"
+          R2_SECRET_ACCESS_KEY: "ci-test-secret-key"
+          R2_BUCKET: "recruit-ai-ci"
+
         run: |
-          echo "MONGO_URI is configured for CI"
+          echo "Checking backend environment..."
+
           python -c "import os; print('MONGO_URI exists:', bool(os.getenv('MONGO_URI')))"
+          python -c "import os; print('R2_ENDPOINT exists:', bool(os.getenv('R2_ENDPOINT')))"
+          python -c "import os; print('R2_ACCESS_KEY_ID exists:', bool(os.getenv('R2_ACCESS_KEY_ID')))"
+          python -c "import os; print('R2_SECRET_ACCESS_KEY exists:', bool(os.getenv('R2_SECRET_ACCESS_KEY')))"
+          python -c "import os; print('R2_BUCKET exists:', bool(os.getenv('R2_BUCKET')))"
+
           python -c "from app.main import app; print('FastAPI backend import successful')"
 
 
