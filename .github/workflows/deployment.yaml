@@ -23,9 +23,6 @@ jobs:
       run:
         working-directory: backend
 
-    env:
-      MONGO_URI: "mongodb://localhost:27017/recruit_ai_ci"
-
     steps:
 
       - name: Checkout repository
@@ -42,7 +39,11 @@ jobs:
           pip install -r requirements.txt
 
       - name: Check backend imports
+        env:
+          MONGO_URI: "mongodb://localhost:27017/recruit_ai_ci"
         run: |
+          echo "MONGO_URI is configured for CI"
+          python -c "import os; print('MONGO_URI exists:', bool(os.getenv('MONGO_URI')))"
           python -c "from app.main import app; print('FastAPI backend import successful')"
 
 
