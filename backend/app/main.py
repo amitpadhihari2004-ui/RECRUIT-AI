@@ -39,23 +39,22 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
 
+    # Local development
     allow_origins=[
-        # Local development
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-
-        # Vercel production frontend
-        "https://recruit-o1nmcmb96-tech-amit-07.vercel.app",
-
-        # Other Vercel deployments
-        "https://recruit-ai-sandy.vercel.app",
-        "https://recruit-ai-git-main-tech-amit-07.vercel.app",
     ],
 
+    # Allow all Vercel deployments
+    # This automatically covers:
+    # https://recruit-qb3x4pe5w-tech-amit-07.vercel.app
+    # https://recruit-o1nmcmb96-tech-amit-07.vercel.app
+    # https://recruit-ai-sandy.vercel.app
+    # etc.
+    allow_origin_regex=r"https://.*\.vercel\.app",
+
     allow_credentials=True,
-
     allow_methods=["*"],
-
     allow_headers=["*"],
 )
 
@@ -68,6 +67,7 @@ app.add_middleware(
 async def startup():
     try:
         client.admin.command("ping")
+
         print("========================================")
         print("✅ MongoDB Connected Successfully!")
         print("========================================")
