@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   getMyAnalytics,
   refreshMyDashboard,
-} from "../api/AnalyticsApi";
+} from "../api/analyticsApi";
 
 import {
   Activity,
