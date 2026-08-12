@@ -1,0 +1,9 @@
+Background       → #F7F6F2
+Cards             → #FFFFFF
+Headings          → #172033
+Normal buttons    → #172033
+Main accent       → #0F766E
+Charts            → #0F766E + #172033
+Success           → #16803C
+Warning           → #B7791F
+Error             → #C53030
